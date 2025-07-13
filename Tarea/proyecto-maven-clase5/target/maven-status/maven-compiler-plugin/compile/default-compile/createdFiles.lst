@@ -1,2 +1,3 @@
-org\byronpineda\controller\InicioController.class
 org\byronpineda\system\Main.class
+org\byronpineda\controller\InicioController.class
+org\byronpineda\controller\MenuController.class
