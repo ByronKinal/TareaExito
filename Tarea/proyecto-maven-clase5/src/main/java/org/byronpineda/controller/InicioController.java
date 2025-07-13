@@ -16,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.byronpineda.database.Conexion;
+import org.byronpineda.model.Usuario;
 import org.byronpineda.system.Main;
 
 /**
  * FXML Controller class
  *
- * @author Wilson Florian
+ * @author Byron Pineda
  */
 public class InicioController implements Initializable {
 
@@ -44,7 +46,7 @@ public class InicioController implements Initializable {
     private void cargarUsuarios() {        
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
-            PreparedStatement stmt = conexion.prepareStatement("CALL sp_ListarUsuario()");
+            PreparedStatement stmt = conexion.prepareStatement("call sp_ListarUsuario()");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()) {
@@ -86,11 +88,7 @@ public class InicioController implements Initializable {
         for (Usuario u : usuarios) {
             if (u.getCorreoUsuario().equals(usuario) && u.getContraseñaUsuario().equals(contrasena)) {
                 if (u.getTipo().equals("Admin")) {
-                    principal.getMenuAdminView();
-                    return;
-                }
-                if (u.getTipo().equals("Empleado")) {
-                    principal.getFacturaView();
+                    principal.getMenuView();
                     return;
                 }
             }

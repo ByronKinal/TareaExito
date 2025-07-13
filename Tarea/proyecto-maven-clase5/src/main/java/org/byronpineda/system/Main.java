@@ -10,13 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.byronpineda.controller.InicioController;
-import org.fundacionkinal.controller.ComprasController;
-import org.fundacionkinal.controller.EmpleadoController;
-import org.fundacionkinal.controller.Factura2Controller;
-import org.fundacionkinal.controller.FacturaController;
-import org.fundacionkinal.controller.LoginController;
-import org.fundacionkinal.controller.MenuAdminController;
-import org.fundacionkinal.controller.ProductosController;
+import org.byronpineda.controller.MenuController;
+import org.byronpineda.controller.ProductoController;
+import org.byronpineda.controller.VentaViewController;
+
 
 /**
  *
@@ -26,7 +23,7 @@ public class Main extends Application {
 
     private Stage escenarioPrincipal;
     private Scene siguienteEscena;
-    private static String URL = "/org/fundacionkinal/view/";
+    private static String URL = "/view/";
 
     public static void main(String[] args) {
         launch(args);
@@ -35,14 +32,14 @@ public class Main extends Application {
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {
         this.escenarioPrincipal = escenarioPrincipal;
-        escenarioPrincipal.setTitle("CAJA KINAL");
-        Image icono = new javafx.scene.image.Image("/org/fundacionkinal/image/Logo.png");
+        escenarioPrincipal.setTitle("Tienda Exitante");
+        Image icono = new javafx.scene.image.Image("/imagen/Logo.png");
         escenarioPrincipal.getIcons().add(icono);
         getLoginView();
         escenarioPrincipal.show();
     }
 
-    public Initializable cambiarEscena(String fxml, double ancho, double alto) throws Exception {
+    public Initializable cambiarEscena(String fxml) throws Exception {
         Initializable interfazDeCambio = null;
         FXMLLoader cargadorFXML = new FXMLLoader();
         InputStream archivoFXML = Main.class.getResourceAsStream(URL + fxml);
@@ -50,7 +47,7 @@ public class Main extends Application {
         cargadorFXML.setBuilderFactory(new JavaFXBuilderFactory());
         cargadorFXML.setLocation(Main.class.getResource(URL + fxml));
 
-        siguienteEscena = new Scene(cargadorFXML.load(archivoFXML), ancho, alto);
+        siguienteEscena = new Scene(cargadorFXML.load(archivoFXML));
         escenarioPrincipal.setScene(siguienteEscena);
         escenarioPrincipal.sizeToScene();
 
@@ -61,10 +58,45 @@ public class Main extends Application {
     public void getLoginView() {
         try {
             InicioController control
-                    = (InicioController) cambiarEscena("LoginView.fxml", 1920, 1080);
+                    = (InicioController) cambiarEscena("InicioView.fxml");
             control.setPrincipal(this);
         } catch (Exception ex) {
             System.out.println("Error al ir al login: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
+    
+    public void getMenuView() {
+        try {
+            MenuController control
+                    = (MenuController) cambiarEscena("MenuView.fxml");
+            control.setPrincipal(this);
+        } catch (Exception ex) {
+            System.out.println("Error al ir al Menu: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    public void getProductoView() {
+        try {
+            ProductoController control
+                    = (ProductoController) cambiarEscena("ProductoView.fxml");
+            control.setPrincipal(this);
+        } catch (Exception ex) {
+            System.out.println("Error al ir al Producto: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    public void getVentaView() {
+        try {
+            VentaViewController control
+                    = (VentaViewController) cambiarEscena("VentaView.fxml");
+            control.setPrincipal(this);
+        } catch (Exception ex) {
+            System.out.println("Error al ir al Venta: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+}
+

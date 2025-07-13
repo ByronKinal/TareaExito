@@ -1,3 +1,11 @@
+org\byronpineda\database\Conexion.class
+org\byronpineda\report\Report.class
+org\byronpineda\controller\ProductoController$Acciones.class
+org\byronpineda\model\Producto.class
+org\byronpineda\controller\VentaViewController.class
+org\byronpineda\model\Factura.class
 org\byronpineda\system\Main.class
 org\byronpineda\controller\InicioController.class
 org\byronpineda\controller\MenuController.class
+org\byronpineda\model\Usuario.class
+org\byronpineda\controller\ProductoController.class
