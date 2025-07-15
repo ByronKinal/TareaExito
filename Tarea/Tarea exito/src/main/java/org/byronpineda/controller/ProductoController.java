@@ -26,7 +26,7 @@ import org.byronpineda.system.Main;
 /**
  * FXML Controller class
  *
- * @author Wilson Florian
+ * @author Byron Pineda
  */
 public class ProductoController implements Initializable {
 

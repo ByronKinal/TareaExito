@@ -17,7 +17,7 @@ import org.byronpineda.controller.VentaViewController;
 
 /**
  *
- * @author Wilson Florian
+ * @author Byron Pineda
  */
 public class Main extends Application {
 
