@@ -48,8 +48,6 @@ public class VentaViewController implements Initializable {
     @FXML
     private TableColumn<Producto, Integer> colId;
     @FXML
-    private TableColumn<Producto, String> colCodigo;
-    @FXML
     private TableColumn<Producto, String> colProducto;
     @FXML
     private TableColumn<Producto, Double> colPrecioUnitario;
@@ -67,11 +65,6 @@ public class VentaViewController implements Initializable {
         cargarProductosComboBox();
         setFormatoColumnaModelo();
         cargarDatos();
-        cmbProductos.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                agregarProducto();
-            }
-        });
     }
 
     private void cargarProductosComboBox(){
@@ -124,7 +117,6 @@ public class VentaViewController implements Initializable {
 
     public void setFormatoColumnaModelo() {
         colId.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoBarras"));
         colProducto.setCellValueFactory(new PropertyValueFactory<>("nombreProducto"));
         colPrecioUnitario.setCellValueFactory(new PropertyValueFactory<>("precioProducto"));
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));

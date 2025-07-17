@@ -16,14 +16,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="708.0" prefWidth="1519.0" styleClass="mainFxmlClass" stylesheets="@ventaview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.byronpineda.controller.VentaViewController">
+<AnchorPane id="AnchorPane" prefHeight="708.0" prefWidth="1520.0" styleClass="mainFxmlClass" stylesheets="@ventaview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.byronpineda.controller.VentaViewController">
    <children>
-      <GridPane alignment="TOP_CENTER" layoutX="38.0" layoutY="94.0" prefHeight="556.0" prefWidth="722.0">
+      <GridPane alignment="TOP_CENTER" layoutX="59.0" layoutY="94.0" prefHeight="556.0" prefWidth="676.0">
          <columnConstraints>
             <ColumnConstraints />
-            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="0.0" prefWidth="338.5999938964843" />
-            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="793.0" minWidth="0.0" prefWidth="603.5999755859375" />
-            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="793.0" minWidth="10.0" prefWidth="134.8000244140626" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="0.0" prefWidth="170.39993591308593" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="793.0" minWidth="0.0" prefWidth="480.00006408691405" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
@@ -32,8 +31,8 @@
             <RowConstraints maxHeight="82.0" minHeight="104.0" prefHeight="101.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="99.20001220703125" minHeight="41.60003662109375" prefHeight="42.4000244140625" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="123.4000244140625" minHeight="20.0" prefHeight="112.79997558593749" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="75.20001220703125" minHeight="19.000024414062523" prefHeight="23.000024414062523" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="120.0" minHeight="36.000012207031205" percentHeight="0.0" prefHeight="67.19997558593747" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="75.20001220703125" minHeight="19.000024414062523" prefHeight="42.19996337890626" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="120.0" minHeight="36.000012207031205" percentHeight="0.0" prefHeight="47.20003662109377" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -42,7 +41,7 @@
                   <Point3D x="2.0" z="1.0" />
                </rotationAxis>
             </Label>
-            <GridPane prefHeight="65.0" prefWidth="497.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+            <GridPane prefHeight="67.0" prefWidth="491.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="263.59996337890624" minWidth="10.0" prefWidth="243.59996337890624" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="328.99998474121094" minWidth="10.0" prefWidth="254.00003662109373" />
@@ -51,12 +50,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
+                  <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="54.0" prefWidth="138.0" text="AGREGAR" GridPane.columnIndex="1" />
                   <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="54.0" prefWidth="138.0" text="ELIMINAR" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnFinalizar" mnemonicParsing="false" onAction="#FinalizarPedido" prefHeight="54.0" prefWidth="138.0" text="FINALIZAR" textAlignment="CENTER" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <Label GridPane.rowIndex="1" />
@@ -82,7 +81,7 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="txtTotal" prefHeight="54.0" prefWidth="138.0" GridPane.columnIndex="1" />
-                  <Label prefHeight="26.0" prefWidth="100.0" stylesheets="@../../../../../../../ProyectoCajaKinal/ProyectoExpoKinal/PoryectoExpoKinal/src/org/fundacionkinal/resource/facturaview.css" text="TOTAL" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label prefHeight="31.0" prefWidth="137.0" stylesheets="@../../../../../../../ProyectoCajaKinal/ProyectoExpoKinal/PoryectoExpoKinal/src/org/fundacionkinal/resource/facturaview.css" text="TOTAL" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
@@ -98,10 +97,9 @@
             <ComboBox fx:id="cmbProductos" prefHeight="45.0" prefWidth="488.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TableView fx:id="tablaProductos" layoutX="796.0" layoutY="94.0" prefHeight="556.0" prefWidth="679.0">
+      <TableView fx:id="tablaProductos" layoutX="767.0" layoutY="94.0" prefHeight="498.0" prefWidth="694.0">
          <columns>
             <TableColumn fx:id="colId" prefWidth="50.4000244140625" text="ID" />
-            <TableColumn fx:id="colCodigo" minWidth="0.0" prefWidth="96.0" text="CODIGO" />
             <TableColumn fx:id="colProducto" prefWidth="183.19989013671875" text="PRODUCTO" />
             <TableColumn fx:id="colPrecioUnitario" prefWidth="100.800048828125" text="PRECIO" />
             <TableColumn fx:id="colCantidad" prefWidth="111.199951171875" text="CANTIDAD" />
@@ -115,10 +113,11 @@
             <String fx:value="label-textField" />
          </styleClass>
       </TableView>
-      <ImageView fitHeight="107.0" fitWidth="109.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="107.0" fitWidth="109.0" layoutX="49.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagen/Logo.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnFinalizar" layoutX="1313.0" layoutY="602.0" mnemonicParsing="false" onAction="#FinalizarPedido" prefHeight="54.0" prefWidth="138.0" text="FINALIZAR" textAlignment="CENTER" />
    </children>
 </AnchorPane>
