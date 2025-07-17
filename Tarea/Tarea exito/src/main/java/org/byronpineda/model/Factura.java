@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author byron pineda
+ * @author Byron Pineda
  */
 public class Factura {
     

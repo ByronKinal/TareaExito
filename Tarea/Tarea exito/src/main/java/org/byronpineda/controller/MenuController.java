@@ -16,7 +16,7 @@ import org.byronpineda.system.Main;
 /**
  * FXML Controller class
  *
- * @author c3lun
+ * @author Byron Pineda
  */
 public class MenuController implements Initializable {
 

@@ -27,7 +27,7 @@ import org.byronpineda.system.Main;
 /**
  * FXML Controller class
  *
- * @author byron 
+ * @author Byron Pineda
  */
 public class VentaViewController implements Initializable {
     @FXML

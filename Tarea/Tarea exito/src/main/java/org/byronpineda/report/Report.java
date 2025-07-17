@@ -16,7 +16,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author informatica
+ * @author Byron Pineda
  */
 public class Report {
     // reporte, visualizador, impresor

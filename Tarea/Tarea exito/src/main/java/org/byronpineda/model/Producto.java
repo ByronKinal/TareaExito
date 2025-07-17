@@ -2,7 +2,7 @@ package org.byronpineda.model;
 
 /**
  *
- * @author byron pineda
+ * @author Byron Pineda
  */
 public class Producto {
     private int idProducto;
