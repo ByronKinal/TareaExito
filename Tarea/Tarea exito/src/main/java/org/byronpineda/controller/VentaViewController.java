@@ -46,8 +46,6 @@ public class VentaViewController implements Initializable {
     private TableView<Producto> tablaProductos;
 
     @FXML
-    private TableColumn<Producto, Integer> colId;
-    @FXML
     private TableColumn<Producto, String> colProducto;
     @FXML
     private TableColumn<Producto, Double> colPrecioUnitario;
@@ -116,7 +114,6 @@ public class VentaViewController implements Initializable {
     }
 
     public void setFormatoColumnaModelo() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
         colProducto.setCellValueFactory(new PropertyValueFactory<>("nombreProducto"));
         colPrecioUnitario.setCellValueFactory(new PropertyValueFactory<>("precioProducto"));
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
@@ -182,14 +179,12 @@ public class VentaViewController implements Initializable {
                 ResultSet rsVerificar = stmtVerificar.executeQuery();
 
                 if (rsVerificar.next()) {
-                    String sqlActualizar = "UPDATE DetalleCompras SET cantidad = ?, subtotal = (SELECT precioProducto FROM Productos WHERE idProducto = ?) * ? WHERE idCompra = ? AND idProducto = ?";
-                    PreparedStatement stmtActualizar = conexion.prepareStatement(sqlActualizar);
-                    stmtActualizar.setInt(1, cantidad);
-                    stmtActualizar.setInt(2, idProducto);
-                    stmtActualizar.setInt(3, cantidad);
-                    stmtActualizar.setInt(4, idCompraActual);
-                    stmtActualizar.setInt(5, idProducto);
-                    stmtActualizar.executeUpdate();
+                    String callSP = "{call sp_ActualizarDetalleCompraSimple(?, ?, ?)}";
+                    CallableStatement stmtActualizar = conexion.prepareCall(callSP);
+                    stmtActualizar.setInt(1, idCompraActual);
+                    stmtActualizar.setInt(2, idProducto);    
+                    stmtActualizar.setInt(3, cantidad);    
+                    stmtActualizar.execute();
                 } else {
                     CallableStatement procedimiento = conexion.prepareCall("{call sp_agregarDetalleCompra(?, ?, ?)}");
                     procedimiento.setInt(1, idCompraActual);
@@ -204,7 +199,6 @@ public class VentaViewController implements Initializable {
             }
         } catch (SQLException e) {
             mostrarAlerta("Error al agregar detalle de compra: " + e.getMessage());
-            e.printStackTrace();
         } catch (NumberFormatException e) {
             mostrarAlerta("La cantidad debe ser un número válido");
         }
@@ -213,7 +207,7 @@ public class VentaViewController implements Initializable {
 @FXML
 public void eliminarProducto() {
     Producto productoSeleccionado = tablaProductos.getSelectionModel().getSelectedItem();
-    if (productoSeleccionado != null) {
+    if (productoSeleccionado != null) { 
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
             String sql = "DELETE FROM DetalleCompras WHERE idCompra = ? AND idProducto = ?";

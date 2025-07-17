@@ -499,9 +499,44 @@ call sp_AgregarProducto('Maus','200.00',30,'10001');
 call sp_AgregarProducto('Teclado','150.00',30,'10002');
 call sp_AgregarProducto('Audifonos con cable','30.00',30,'10003');
 call sp_AgregarProducto('Audifonos sin cable','120.00',30,'10004');
-call sp_AgregarProducto('Cascos','2.00',200,'10005');
+call sp_AgregarProducto('Cascos','200.00',20,'10005');
 call sp_AgregarProducto('Carnasa de Telefono','30',30,'10006');
 call sp_AgregarProducto('Cable HDMI','60',30,'10007');
 call sp_AgregarProducto('Cable USB','15',30,'10008');
 call sp_AgregarProducto('Cargador Tipo c','150',30,'10009');
 call sp_ListarProductos();
+
+
+-- Trigger para verificar stock antes de insertar un detalle de compra
+DELIMITER $$
+CREATE TRIGGER tr_VerificarStock_Before_Insert
+BEFORE INSERT ON DetalleCompras
+FOR EACH ROW
+BEGIN
+    DECLARE stock_actual INT;
+    
+    -- Obtener el stock actual del producto
+    SELECT stockProducto INTO stock_actual 
+    FROM Productos 
+    WHERE idProducto = NEW.idProducto;
+    
+    -- Verificar si hay suficiente stock
+    IF stock_actual < NEW.cantidad THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'No hay suficiente stock para este producto';
+    END IF;
+END$$
+DELIMITER ;
+
+-- Trigger para actualizar el stock después de insertar un detalle de compra
+DELIMITER $$
+CREATE TRIGGER tr_ActualizarStock_After_Insert
+AFTER INSERT ON DetalleCompras
+FOR EACH ROW
+BEGIN
+    -- Restar la cantidad comprada del stock disponible
+    UPDATE Productos 
+    SET stockProducto = stockProducto - NEW.cantidad
+    WHERE idProducto = NEW.idProducto;
+END$$
+DELIMITER ;

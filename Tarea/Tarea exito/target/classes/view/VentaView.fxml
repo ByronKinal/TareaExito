@@ -99,7 +99,6 @@
       </GridPane>
       <TableView fx:id="tablaProductos" layoutX="767.0" layoutY="94.0" prefHeight="498.0" prefWidth="694.0">
          <columns>
-            <TableColumn fx:id="colId" prefWidth="50.4000244140625" text="ID" />
             <TableColumn fx:id="colProducto" prefWidth="183.19989013671875" text="PRODUCTO" />
             <TableColumn fx:id="colPrecioUnitario" prefWidth="100.800048828125" text="PRECIO" />
             <TableColumn fx:id="colCantidad" prefWidth="111.199951171875" text="CANTIDAD" />
