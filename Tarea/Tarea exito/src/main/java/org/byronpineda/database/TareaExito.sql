@@ -179,7 +179,6 @@ create procedure sp_ActualizarProducto(
 				p_idProducto = idProducto;
 		
 	end;
-$$
 DELIMITER ;
 
 -- DELETE
@@ -286,21 +285,20 @@ DELIMITER ;
 
 -- UPDATE
 DELIMITER $$
-create procedure sp_ActualizarDetalleCompras(
-		in p_idCompra int,
-        in p_idProducto int,
-		in p_cantidad int,
-		in p_subtotal decimal(10,2))
-	begin
-		update DetalleCompras
-			set
-                cantidad = p_cantidad,
-				subtotal = p_subtotal
-            where 
-				 idCompra = p_idCompra and idProducto = p_idProducto;
-		
-	end;
-$$
+CREATE PROCEDURE sp_ActualizarDetalleCompraSimple(
+    IN p_idCompra INT,
+    IN p_idProducto INT,
+    IN p_cantidad INT
+)
+BEGIN
+    UPDATE DetalleCompras 
+    SET 
+        cantidad = p_cantidad,
+        subtotal = (SELECT precioProducto FROM Productos WHERE idProducto = p_idProducto) * p_cantidad
+    WHERE 
+        idCompra = p_idCompra AND 
+        idProducto = p_idProducto;
+END$$
 DELIMITER ;
 
 -- DELETE
@@ -540,3 +538,18 @@ BEGIN
     WHERE idProducto = NEW.idProducto;
 END$$
 DELIMITER ;
+
+
+-- Trigger para devolver el stock cuando se elimina un detalle de compra
+DELIMITER $$
+CREATE TRIGGER tr_DevolverStock_After_Delete
+AFTER DELETE ON DetalleCompras
+FOR EACH ROW
+BEGIN
+    -- Devolver la cantidad al stock cuando se elimina un detalle de compra
+    UPDATE Productos 
+    SET stockProducto = stockProducto + OLD.cantidad
+    WHERE idProducto = OLD.idProducto;
+END$$
+DELIMITER ;
+
